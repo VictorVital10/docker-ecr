@@ -1,0 +1,1 @@
+Projto prático envolvendo a criação de imagens Docker, execução de containers e fluxo de build e push de imagens para o Amazon ECR (AWS).
