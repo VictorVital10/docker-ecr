@@ -5,6 +5,7 @@ resource "aws_instance" "vav-instance" {
   instance_type = "t3.micro"
   key_name = "vav-kp"
   vpc_security_group_ids = [aws_security_group.vav-sg.id]
+  iam_instance_profile = aws_iam_instance_profile.ec2-profile.name
 
   tags = {
     Name = "VAV-Instance"
@@ -43,7 +44,7 @@ resource "aws_vpc_security_group_ingress_rule" "allow-ssh" {
 
 resource "aws_vpc_security_group_ingress_rule" "allow-http" {
   security_group_id = aws_security_group.vav-sg.id
-  cidr_ipv4         = "192.168.0.3/32"
+  cidr_ipv4         = "0.0.0.0/0"
   from_port         = 80
   ip_protocol       = "tcp"
   to_port           = 80
@@ -51,7 +52,7 @@ resource "aws_vpc_security_group_ingress_rule" "allow-http" {
 
 resource "aws_vpc_security_group_ingress_rule" "allow-https" {
   security_group_id = aws_security_group.vav-sg.id
-  cidr_ipv4         = "192.168.0.3/32"
+  cidr_ipv4         = "0.0.0.0/0"
   from_port         = 443
   ip_protocol       = "tcp"
   to_port           = 443
