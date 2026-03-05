@@ -1,0 +1,11 @@
+# Terraform Essential
+.terraform/
+
+
+# Plan Files
+tfplan
+tfplan.out
+
+# TF State 
+*.tfstate
+.tfstate.*

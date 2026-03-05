@@ -1,32 +1,32 @@
 # EC2 instance.
 
 resource "aws_instance" "vav-instance" {
-  ami = "ami-08dd439af9c3f1639"
-  instance_type = "t3.micro"
-  key_name = "vav-kp"
+  ami                    = "ami-08dd439af9c3f1639"
+  instance_type          = "t3.micro"
+  key_name               = "vav-kp"
   vpc_security_group_ids = [aws_security_group.vav-sg.id]
-  iam_instance_profile = aws_iam_instance_profile.ec2-profile.name
+  iam_instance_profile   = aws_iam_instance_profile.ec2-profile.name
 
   tags = {
-    Name = "VAV-Instance"
+    Name        = "VAV-Instance"
     Provisioned = "Terraform"
   }
 }
 
 # Key Pair SSH.
 
-resource "aws_key_pair" "vav-kp-" {
-    key_name = "vav-kp"
-    public_key = file("C:/Users/Vitor Vital/.SSH/VAV-Instance/PUBK")
+resource "aws_key_pair" "vav-kp" {
+  key_name   = "vav-kp"
+  public_key = file("C:/Users/vitas/.ssh/vav-instance/PUBK")
 }
 
 # Security Group
 
 resource "aws_security_group" "vav-sg" {
-  name = "vav-sg"
-  description = ""
-  vpc_id = "vpc-05e50bc6601329573"
-  
+  name        = "vav-sg"
+  description = "asd"
+  vpc_id      = "vpc-05e50bc6601329573"
+
   tags = {
     Provisioned = "Terraform"
   }
@@ -36,7 +36,7 @@ resource "aws_security_group" "vav-sg" {
 
 resource "aws_vpc_security_group_ingress_rule" "allow-ssh" {
   security_group_id = aws_security_group.vav-sg.id
-  cidr_ipv4         = "192.168.0.3/32"
+  cidr_ipv4         = "177.181.1.140/32"
   from_port         = 22
   ip_protocol       = "tcp"
   to_port           = 22
